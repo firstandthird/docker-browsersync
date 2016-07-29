@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [[ -z "$PORT" ]]; then
+  PORT=8080
+fi
+
+if [[ -z "$PROXYPORT" ]]; then
+  PORT=8080
+fi
+
+if [[ -z "$FILES" ]]; then
+  FILES="/watch/**/*"
+fi
+
+if [[ -z "$PROXY" ]]; then
+  PROXY="proxy"
+fi
+
+exec browser-sync \
+  start \
+  --port $PORT \
+  --host 0.0.0.0 \
+  --proxy $PROXY:$PROXYPORT \
+  --files $FILES
